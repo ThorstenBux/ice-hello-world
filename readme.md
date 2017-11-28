@@ -1,5 +1,5 @@
 # ICE Hello World
-A very simple hello world example using a python server and a js browser client.
+A very simple ICE hello world example using a python server and a js browser client.
 
 ## Dependency
 - You need to have Ice for Python installed `pip install zeroc-ice` (https://zeroc.com/downloads//ice#python)
