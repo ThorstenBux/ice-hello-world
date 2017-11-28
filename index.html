@@ -1,0 +1,45 @@
+<head></head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ice/3.7.0/Ice.js"></script>
+<script src="./Hello.js"></script>
+
+
+
+<body>
+<h1> Hello ICE</h1>
+
+<button onClick="sayHello()">Say hallo</button>
+
+</body>
+
+<script type="text/javascript">
+
+const communicator = Ice.initialize();
+
+async function sayHello()
+{  
+    try {
+        //
+        // Create a proxy for the hello object
+        //
+        var proxy = communicator.stringToProxy("hello:ws -h localhost -p 10002");
+
+        //
+        // Down-cast this proxy to the derived interface Demo::Printer
+        // using checkedCast, and invoke the print operation if
+        // the checkedCast succeeds.
+        //
+        const hello = await Demo.HelloPrx.checkedCast(proxy);
+        await hello.sayHello(100);        
+    }
+    catch(ex)
+    {
+        console.log(ex.toString());
+    }
+    finally {
+        if(communicator)
+        {
+            return communicator.destroy();
+        }  
+    }
+}
+</script>
